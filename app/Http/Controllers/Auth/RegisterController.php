@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     // Muestra el formulario de registro
@@ -26,9 +25,7 @@ class RegisterController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-        // 3. Iniciar sesión automáticamente
-        Auth::login($user);
-        // 4. Redirigir al dashboard
-        return redirect()->intended('/dashboard');
+        // 3. Redirigir al login con mensaje de éxito
+        return redirect('/login')->with('success', 'Cuenta creada correctamente. Revisá tu correo para confirmar.');
     }
 }

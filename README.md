@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TaskFlow — Gestión de Tareas Académicas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web para gestionar tareas, materias y calendario académico. Desarrollada con **Laravel 13**, **MySQL**, **Tailwind CSS v4** y **Alpine.js**.
 
-## About Laravel
+## Requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2+
+- Composer
+- MySQL 8.0+
+- Node.js 20+ y pnpm (o npm)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Instalación
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clonar el repositorio
+git clone https://github.com/LeoCrisGarcia/gestion-tareas-academicas.git
+cd gestion-tareas-academicas
 
-php artisan boost:install
+# 2. Instalar dependencias de PHP
+composer install
+
+# 3. Copiar y configurar variables de entorno
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Editar `.env` y ajustar los datos de conexión a tu base de datos:
 
-## Contributing
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gestion_tareas
+DB_USERNAME=root
+DB_PASSWORD=tu_contraseña
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Crear la base de datos
 
-## Code of Conduct
+Conéctate a MySQL y ejecutá:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sql
+CREATE DATABASE gestion_tareas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-## Security Vulnerabilities
+O desde la terminal:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+mysql -u root -p -e "CREATE DATABASE gestion_tareas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+```
 
-## License
+## Migraciones y datos de prueba
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+# Ejecutar migraciones (crea las tablas)
+php artisan migrate
+
+# Cargar datos de prueba (usuario, materias y tareas)
+php artisan db:seed
+```
+
+Esto crea un usuario de prueba:
+
+| Campo    | Valor          |
+| -------- | -------------- |
+| Email    | leo@test.com   |
+| Password | password       |
+
+Junto con 3 materias y 7 tareas de ejemplo.
+
+## Frontend
+
+```bash
+# Instalar dependencias de JS
+pnpm install
+
+# Compilar assets y arrancar el servidor de desarrollo
+pnpm run dev
+```
+
+## Servidor de desarrollo
+
+```bash
+php artisan serve
+```
+
+La app estará disponible en `http://localhost:8000`.
+
+## Resetear todo (si necesitás empezar de cero)
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Esto borra todas las tablas, las recrea y vuelve a cargar los datos de prueba.

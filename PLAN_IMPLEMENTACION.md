@@ -6,8 +6,8 @@
 |------|-----------|
 | Backend | Laravel 13 + PHP 8.3 |
 | Frontend | Blade + Tailwind CSS v4 + Alpine.js |
-| BD | SQLite |
-| Auth | Custom (login con email + contraseña, sesión, roles) |
+| BD | MySQL |
+| Auth | Custom (login con email + contraseña, sesión) |
 
 ---
 
@@ -15,7 +15,7 @@
 
 ```sql
 users
-  id, name, email, password, role (estudiante/profesor), remember_token, timestamps
+  id, name, email, password, remember_token, timestamps
 
 subjects
   id, name, color, user_id (FK), created_at
@@ -27,9 +27,8 @@ tasks
   user_id (FK), created_at, updated_at
 ```
 
-- `users.role` → `estudiante` | `profesor`
-- `subjects.user_id` → profesor que creó la materia
-- `tasks.user_id` → estudiante asignado (opcional, nullable)
+- `subjects.user_id` → usuario propietario de la materia
+- `tasks.user_id` → usuario propietario de la tarea
 
 ---
 
@@ -39,7 +38,7 @@ tasks
 
 - [ ] Login/Register manual con validación y sesión
 - [ ] Logout + middleware de autenticación
-- [ ] Middleware de roles (`CheckRole: profesor`)
+- [ ] Middleware de autenticación (solo usuarios logueados)
 - [ ] Layout base con Tailwind + Alpine.js + navegación
 - [ ] Modelos: `Subject`, `Task` con relaciones y `fillable`
 - [ ] Seeders con usuarios, materias y tareas de prueba
@@ -47,9 +46,9 @@ tasks
 
 ### Fase 2 — CRUD
 
-- [ ] CRUD de materias (nombre + color, solo profesor)
+- [ ] CRUD de materias (nombre + color, por usuario)
 - [ ] CRUD de tareas (materia, título, descripción, fecha, prioridad, estado)
-- [ ] Estudiante: solo ve sus tareas; profesor: ve y administra
+- [ ] Cada usuario ve y administra solo sus propias materias y tareas
 - [ ] Toggle completada vía Alpine.js (fetch + actualización en caliente)
 
 ### Fase 3 — Dashboard

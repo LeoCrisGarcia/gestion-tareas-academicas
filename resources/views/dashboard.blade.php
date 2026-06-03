@@ -250,7 +250,7 @@
         <div class="card-theme rounded-[var(--radius-card)] p-14 text-center">
             <div class="relative z-10">
                 <p class="text-secondary/50 text-base">No hay tareas que mostrar.</p>
-                <a href="{{ route('tasks.create') }}" class="inline-block mt-4 text-accent font-medium text-sm hover:text-on-accent transition">Creá tu primera tarea</a>
+                <a href="{{ route('tasks.create') }}" class="inline-block mt-4 text-accent font-medium text-sm hover:text-on-accent transition">Crea tu primera tarea</a>
             </div>
         </div>
     @endif

@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Iniciar sesión — TaskFlow</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen flex items-center justify-center antialiased font-sans" style="background: var(--bg-body); color: var(--text-primary);">
     <div class="w-full max-w-sm mx-4">
         <div class="text-center mb-10">
             <h1 class="text-4xl font-extrabold tracking-tight text-primary">TaskFlow</h1>
-            <p class="text-secondary/50 mt-2 text-sm">Iniciá sesión para continuar</p>
+            <p class="text-secondary/50 mt-2 text-sm">Inicia sesión para continuar</p>
         </div>
+
+        @if (session('success'))
+            <div class="mb-4 p-4 rounded-xl text-sm font-medium border"
+                 style="background: var(--bg-accent); color: var(--text-on-accent); border-color: var(--border-card);">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <div class="card-theme rounded-[var(--radius-hero)] p-8">
             <div class="relative z-10">
@@ -21,9 +30,9 @@
                     <div class="mb-5">
                         <label class="block text-sm font-medium text-secondary/70 mb-1.5">Email</label>
                         <input type="email" name="email" value="{{ old('email') }}" autocomplete="email"
-                               class="input-theme w-full rounded-[var(--radius-input)] px-4 py-2.5 text-sm">
+                               class="input-theme w-full rounded-[var(--radius-input)] px-4 py-2.5 text-sm @error('email') input-error @enderror">
                         @error('email')
-                            <p class="text-secondary/60 text-sm mt-1">{{ $message }}</p>
+                            <p class="text-error text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -31,7 +40,7 @@
                         <label class="block text-sm font-medium text-secondary/70 mb-1.5">Contraseña</label>
                         <div x-data="{ show: false }" class="relative">
                             <input :type="show ? 'text' : 'password'" name="password" autocomplete="current-password"
-                                   class="input-theme w-full rounded-[var(--radius-input)] px-4 py-2.5 pr-10 text-sm">
+                                   class="input-theme w-full rounded-[var(--radius-input)] px-4 py-2.5 pr-10 text-sm @error('password') input-error @enderror">
                             <button type="button" @click="show = !show"
                                     class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary/30 hover:text-secondary/60">
                                 <svg x-show="!show" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +53,7 @@
                             </button>
                         </div>
                         @error('password')
-                            <p class="text-secondary/60 text-sm mt-1">{{ $message }}</p>
+                            <p class="text-error text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -60,8 +69,8 @@
                 </form>
 
                 <p class="mt-6 text-center text-sm text-secondary/50">
-                    ¿No tenés cuenta?
-                    <a href="/register" class="text-accent font-medium hover:text-on-accent transition">Registrate</a>
+                    ¿No tienes cuenta?
+                    <a href="/register" class="text-accent font-medium hover:text-on-accent transition">Regístrate</a>
                 </p>
             </div>
         </div>

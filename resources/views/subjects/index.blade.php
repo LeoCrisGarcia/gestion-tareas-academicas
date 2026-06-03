@@ -151,8 +151,8 @@
     @else
         <div class="card-theme rounded-[var(--radius-card)] p-12 text-center">
             <div class="relative z-10">
-                <p class="text-secondary/50 text-lg">No tenés materias todavía.</p>
-                <a href="{{ route('subjects.create') }}" class="inline-block mt-4 text-accent font-medium hover:text-on-accent transition">Creá tu primera materia</a>
+                <p class="text-secondary/50 text-lg">No tienes materias todavía.</p>
+                <a href="{{ route('subjects.create') }}" class="inline-block mt-4 text-accent font-medium hover:text-on-accent transition">Crea tu primera materia</a>
             </div>
         </div>
     @endif
